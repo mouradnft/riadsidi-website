@@ -5,12 +5,9 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { Resend }                    from 'resend'
 
-// Initialize the Resend email client using the API key from environment variables
-// RESEND_API_KEY must be set in .env.local and Vercel dashboard
-const resend = new Resend(process.env.RESEND_API_KEY)
-
 export async function POST(request: NextRequest) {
   try {
+    const resend = new Resend(process.env.RESEND_API_KEY)
     // Parse the JSON body sent by the contact form component
     const { name, phone, email, message } = await request.json()
 
