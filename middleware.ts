@@ -10,7 +10,7 @@ export default createMiddleware({
 
   // Default language — users with no language preference go here
   // French is default because the primary market is Moroccan/French-speaking
-  defaultLocale: 'fr',
+  defaultLocale: 'en',
 
   // Always show the locale prefix in the URL (e.g. /fr/, /en/, /ar/)
   // This makes URLs clear and shareable across languages
