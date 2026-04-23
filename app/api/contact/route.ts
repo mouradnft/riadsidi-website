@@ -26,7 +26,7 @@ export async function POST(request: NextRequest) {
     await resend.emails.send({
       from: 'Riad Sidi Website <noreply@riadsidi.com>', // Sender shown in the inbox
       to:   process.env.CONTACT_EMAIL!,                  // Owner's email from env variable
-      replyTo: email,                                     // Replying goes directly to the visitor
+      reply_to: email,                                    // Replying goes directly to the visitor
       subject: `New Contact Form Message from ${name}`,
 
       // HTML email body — nicely formatted for readability
