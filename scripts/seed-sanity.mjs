@@ -1,0 +1,178 @@
+// scripts/seed-sanity.mjs
+// Run with: node scripts/seed-sanity.mjs
+// Pushes all mock data to Sanity — run once to populate the database
+
+import { createClient } from '@sanity/client'
+
+const client = createClient({
+  projectId: 'fo2rbn6n',
+  dataset:   'production',
+  token:     'sknQ6zl3sOGU9vc3s4ZrZqhcVMrQm6Ro0PTiTV0rmfOqEF0621FBbqzaBqGv3eJqRRF2loi07yDK3PearJ84YIIP8N97NtH3CmRblVIwMwxp2jGaIFsUzlTATvAslpItOBJMbw19WwafHrbGPKZeSTa6UHEmcaQoYF29AeNqZIcb8nWQGHVA',
+  apiVersion: '2024-01-01',
+  useCdn: false,
+})
+
+// ── Site Settings ────────────────────────────────────────────────────────────
+const siteSettings = {
+  _id:   'siteSettings',
+  _type: 'siteSettings',
+  phones:          ['+212 6 61 57 36 00', '+212 674-361550', '+212 535-634712'],
+  whatsapp:        '212701773013',
+  emails:          ['info@riadsidi.com', 'contact@soultanarestaurant.com'],
+  restaurantHours: '10:00 – 00:00',
+  googleMapsUrl:   'https://goo.gl/z3d9QjnSZYRjMExB9',
+  bookingComUrl:   'https://www.booking.com',
+  address: {
+    fr: '60 Bis Ain Azliten, Fès 30110, Maroc',
+    en: '60 Bis Ain Azliten, Fes 30110, Morocco',
+    ar: '60 بيس عين أزليتن، فاس 30110، المغرب',
+  },
+  social: {
+    facebook:    'https://facebook.com/restaurantsoultana',
+    instagram:   'https://instagram.com/restaurantsoultana',
+    twitter:     'https://twitter.com/Soulatanarestau',
+    tripadvisor: 'https://tripadvisor.com',
+    youtube:     'https://youtube.com',
+  },
+  defaultSeo: {
+    title: {
+      fr: 'Riad Sidi — Riad de Luxe & Restaurant Soultana, Fès',
+      en: 'Riad Sidi — Luxury Riad & Restaurant Soultana, Fes',
+      ar: 'رياض سيدي — رياض فاخر ومطعم سلطانة، فاس',
+    },
+  },
+}
+
+// ── Rooms ────────────────────────────────────────────────────────────────────
+const rooms = [
+  {
+    _id: 'room-1', _type: 'room',
+    title:       { fr: 'Chambre Double', en: 'Double Room', ar: 'غرفة مزدوجة' },
+    description: { fr: 'Chambre confortable décorée dans le pur style marocain traditionnel avec mosaïques et bois de cèdre sculpté.', en: 'Comfortable room decorated in pure traditional Moroccan style with mosaics and carved cedar wood.', ar: 'غرفة مريحة مزيّنة بالأسلوب المغربي التقليدي الأصيل بالفسيفساء وخشب الأرز المنحوت.' },
+    price: 70, priceNote: 'per night', order: 1,
+    bookingUrl: 'https://www.booking.com',
+    features: {
+      fr: ['Salle de bain privée', 'WiFi gratuit', 'Accès terrasse panoramique', 'Décor marocain traditionnel'],
+      en: ['Private bathroom', 'Complimentary WiFi', 'Rooftop terrace access', 'Traditional Moroccan décor'],
+      ar: ['حمام خاص', 'واي فاي مجاني', 'وصول للشرفة البانورامية', 'ديكور مغربي تقليدي'],
+    },
+  },
+  {
+    _id: 'room-2', _type: 'room',
+    title:       { fr: 'Chambre Double avec Balcon', en: 'Double Room with Balcony', ar: 'غرفة مزدوجة مع شرفة' },
+    description: { fr: 'Chambre spacieuse avec balcon privé offrant une vue imprenable sur la médina de Fès.', en: 'Spacious room with a private balcony offering stunning views over the Fes medina.', ar: 'غرفة فسيحة مع شرفة خاصة توفر إطلالات خلابة على مدينة فاس القديمة.' },
+    price: 70, priceNote: 'per night', order: 2,
+    bookingUrl: 'https://www.booking.com',
+    features: {
+      fr: ['Balcon privé vue médina', 'Salle de bain privée', 'WiFi gratuit', 'Accès terrasse panoramique'],
+      en: ['Private balcony with medina view', 'Private bathroom', 'Complimentary WiFi', 'Rooftop terrace access'],
+      ar: ['شرفة خاصة بإطلالة على المدينة', 'حمام خاص', 'واي فاي مجاني', 'وصول للشرفة البانورامية'],
+    },
+  },
+  {
+    _id: 'room-3', _type: 'room',
+    title:       { fr: 'Chambre Deluxe', en: 'Deluxe Room', ar: 'غرفة ديلوكس' },
+    description: { fr: "Chambre deluxe raffinée alliant le charme de l'artisanat marocain au confort contemporain.", en: 'Refined deluxe room blending the charm of Moroccan craftsmanship with contemporary comfort.', ar: 'غرفة ديلوكس راقية تجمع بين سحر الحرفة المغربية والراحة المعاصرة.' },
+    price: 55, priceNote: 'per night', order: 3,
+    bookingUrl: 'https://www.booking.com',
+    features: {
+      fr: ['Salle de bain de luxe', 'WiFi gratuit', 'Accès terrasse panoramique', 'Mobilier marocain authentique', 'Vue sur patio'],
+      en: ['Luxury bathroom', 'Complimentary WiFi', 'Rooftop terrace access', 'Authentic Moroccan furnishings', 'Patio view'],
+      ar: ['حمام فاخر', 'واي فاي مجاني', 'وصول للشرفة البانورامية', 'أثاث مغربي أصيل', 'إطلالة على الفناء'],
+    },
+  },
+  {
+    _id: 'room-4', _type: 'room',
+    title:       { fr: 'Suite Deluxe', en: 'Suite Deluxe', ar: 'جناح ديلوكس' },
+    description: { fr: "Notre suite la plus somptueuse — un espace royal avec salon séparé, décoration d'exception et vue panoramique sur Fès.", en: 'Our most sumptuous suite — a royal space with a separate lounge, exceptional décor, and panoramic views over Fes.', ar: 'جناحنا الأكثر فخامة — مساحة ملكية مع صالة جلوس منفصلة وديكور استثنائي وإطلالات بانورامية على فاس.' },
+    price: 90, priceNote: 'per night', order: 4,
+    bookingUrl: 'https://www.booking.com',
+    features: {
+      fr: ['Salon séparé', 'Salle de bain marbre', 'WiFi gratuit', 'Accès terrasse panoramique', 'Service en chambre', 'Vue panoramique'],
+      en: ['Separate lounge', 'Marble bathroom', 'Complimentary WiFi', 'Rooftop terrace access', 'Room service', 'Panoramic view'],
+      ar: ['صالة جلوس منفصلة', 'حمام رخامي', 'واي فاي مجاني', 'وصول للشرفة البانورامية', 'خدمة الغرف', 'إطلالة بانورامية'],
+    },
+  },
+]
+
+// ── Menu Items ───────────────────────────────────────────────────────────────
+const menuItems = [
+  { _id: 'menu-m1',  _type: 'menuItem', category: 'appetizer', isNew: false, isVegetarian: true,  order: 1, availableInPackages: ['simple', 'special', 'show'], name: { fr: 'Sélection de Salades Variées', en: 'Selection of Fancy Salads', ar: 'تشكيلة السلطات المتنوعة' }, description: { fr: 'Pomme de terre marinée, courge rouge sucrée, carottes marinées, zaalouk, taktouka, courgette marinée, concombre', en: 'Marinated potato, sweet red squash, marinated carrots, zaalouk, taktouka, marinated zucchini, cucumber', ar: 'بطاطا متبّلة، قرع أحمر حلو، جزر متبّل، زعلوك، تقتوقة، كوسة متبّلة، خيار' } },
+  { _id: 'menu-m2',  _type: 'menuItem', category: 'appetizer', isNew: false, isVegetarian: true,  order: 2, availableInPackages: ['simple'], name: { fr: 'Harira Fassia', en: 'Harira Fassia', ar: 'حريرة فاسية' }, description: { fr: 'Soupe marocaine traditionnelle de Fès', en: 'Traditional Moroccan soup from Fes', ar: 'شوربة مغربية تقليدية من مدينة فاس' } },
+  { _id: 'menu-m3',  _type: 'menuItem', category: 'appetizer', isNew: false, isVegetarian: true,  order: 3, availableInPackages: ['simple'], name: { fr: 'Chorba Végétarienne', en: 'Vegetarian Chorba', ar: 'شوربة خضار' }, description: { fr: 'Soupe légère de légumes frais', en: 'Light fresh vegetable soup', ar: 'شوربة خفيفة من الخضار الطازجة' } },
+  { _id: 'menu-m4',  _type: 'menuItem', category: 'appetizer', isNew: false, isVegetarian: true,  order: 4, availableInPackages: ['simple'], name: { fr: 'Salade Taktouka', en: 'Taktouka Salad', ar: 'سلطة تقتوقة' }, description: { fr: 'Tomate et poivron vert doux', en: 'Tomato and green sweet pepper', ar: 'طماطم وفليفلة خضراء حلوة' } },
+  { _id: 'menu-m5',  _type: 'menuItem', category: 'appetizer', isNew: false, isVegetarian: true,  order: 5, availableInPackages: ['simple'], name: { fr: 'Salade Zaalouk', en: 'Zaalouk Salad', ar: 'سلطة زعلوك' }, description: { fr: 'Aubergine et tomate', en: 'Eggplant and tomato', ar: 'باذنجان وطماطم' } },
+  { _id: 'menu-m6',  _type: 'menuItem', category: 'appetizer', isNew: false, isVegetarian: true,  order: 6, availableInPackages: ['simple', 'special', 'show'], name: { fr: 'Salade Marocaine', en: 'Moroccan Salad', ar: 'سلطة مغربية' }, description: { fr: "Tomate et oignon — style arabe, berbère et juif", en: 'Tomato and onion — Arabic, Berber, and Jewish style', ar: 'طماطم وبصل — بالأسلوب العربي والأمازيغي واليهودي' } },
+  { _id: 'menu-m7',  _type: 'menuItem', category: 'tajine',    isNew: false, isVegetarian: false, order: 1, availableInPackages: ['simple', 'special', 'show'], name: { fr: 'Tajine Viande ou Poulet aux Légumes', en: 'Tajine Meat or Chicken with Vegetables', ar: 'طاجين لحم أو دجاج بالخضار' }, description: { fr: 'Poulet ou viande avec légumes mélangés et saveurs marocaines', en: 'Chicken or meat with mixed vegetables and warm Moroccan spices', ar: 'دجاج أو لحم مع خضار مشكّلة وبهارات مغربية دافئة' } },
+  { _id: 'menu-m8',  _type: 'menuItem', category: 'tajine',    isNew: false, isVegetarian: false, order: 2, availableInPackages: ['simple', 'special', 'show'], name: { fr: 'Tajine Poulet aux Olives et Citron', en: 'Tajine Chicken with Olive & Lemon', ar: 'طاجين دجاج بالزيتون والليمون' }, description: { fr: 'Plat classique avec citrons confits, olives et oignons', en: 'Classic dish with preserved lemons, olives, and onions', ar: 'طبق كلاسيكي بالليمون المعصفر والزيتون والبصل' } },
+  { _id: 'menu-m9',  _type: 'menuItem', category: 'tajine',    isNew: false, isVegetarian: false, order: 3, availableInPackages: ['simple', 'special', 'show'], name: { fr: 'Tajine Kefta, Œufs & Tomates', en: 'Tajine Kefta, Eggs & Tomatoes', ar: 'طاجين كفتة وبيض وطماطم' }, description: { fr: 'Boulettes de viande dans une sauce tomate faite maison avec œufs', en: 'Meatballs in zesty homemade tomato sauce with eggs', ar: 'كرات اللحم في صلصة طماطم منزلية مع البيض' } },
+  { _id: 'menu-m10', _type: 'menuItem', category: 'tajine',    isNew: false, isVegetarian: false, order: 4, availableInPackages: ['simple', 'special', 'show'], name: { fr: 'Tajine Viande, Pruneaux & Amandes', en: 'Tajine Meat & Prunes with Almonds', ar: 'طاجين اللحم بالبرقوق واللوز' }, description: { fr: 'Viande, oignon, pruneaux au miel et amandes frites', en: 'Meat, onion, honeyed plum and fried almonds', ar: 'لحم وبصل وبرقوق بالعسل ولوز مقلي' } },
+  { _id: 'menu-m11', _type: 'menuItem', category: 'tajine',    isNew: false, isVegetarian: true,  order: 5, availableInPackages: ['simple', 'special', 'show'], name: { fr: 'Tajine de Légumes', en: 'Tajine Vegetables', ar: 'طاجين الخضار' }, description: { fr: 'Légumes mélangés — option végétarienne', en: 'Mixed vegetables — vegetarian option', ar: 'خضار مشكّلة — خيار نباتي' } },
+  { _id: 'menu-m12', _type: 'menuItem', category: 'fassi',     isNew: false, isVegetarian: false, order: 1, availableInPackages: ['simple', 'special', 'show'], name: { fr: 'Pastilla', en: 'Pastilla', ar: 'البسطيلة' }, description: { fr: 'Pâte feuilletée farcie de poulet, œufs, amandes et cannelle, surmontée de sucre glace', en: 'Phyllo dough stuffed with chicken, eggs, almonds and cinnamon, topped with powdered sugar', ar: 'عجين ورق مملوء بالدجاج والبيض واللوز والقرفة، مغطّى بالسكر البودرة' } },
+  { _id: 'menu-m13', _type: 'menuItem', category: 'fassi',     isNew: false, isVegetarian: false, order: 2, availableInPackages: ['simple', 'special', 'show'], name: { fr: 'Tajine Kadra Touimia', en: 'Tajine Kadra Touimia', ar: 'طاجين قدرة توميّة' }, description: { fr: 'Spécialité de Fès — amandes blanchies, oignons émincés et volaille', en: 'Fes city specialty — blanched almonds, minced onions, and poultry', ar: 'تخصّص مدينة فاس — لوز مسلوق وبصل مفروم ودجاج' } },
+  { _id: 'menu-m14', _type: 'menuItem', category: 'fassi',     isNew: false, isVegetarian: false, order: 3, availableInPackages: ['simple', 'special', 'show'], name: { fr: 'Tajine Mrouzia', en: 'Tajine Mrouzia', ar: 'طاجين المروزية' }, description: { fr: 'Agneau marocain mijoté avec épices chaudes et raisins secs fondants', en: 'Slow-cooked Moroccan lamb with warm spices and soft raisins', ar: 'خروف مغربي مطهو ببطء مع بهارات دافئة وزبيب طري' } },
+  { _id: 'menu-m15', _type: 'menuItem', category: 'fassi',     isNew: false, isVegetarian: false, order: 4, availableInPackages: ['simple', 'special', 'show'], name: { fr: 'Tajine Kabab Mghdour', en: 'Tajine Kabab Mghdour', ar: 'طاجين كباب مغدور' }, description: { fr: "Kébab marocain cuit en tajine, garni d'œufs", en: 'Moroccan kebab cooked in a tagine, finished with eggs', ar: 'كباب مغربي مطهو في الطاجين، مُتمَّم بالبيض' } },
+  { _id: 'menu-m16', _type: 'menuItem', category: 'fassi',     isNew: false, isVegetarian: false, order: 5, availableInPackages: ['simple', 'special', 'show'], name: { fr: "Agneau M'hammer", en: "Lamb Tajine (M'hammer)", ar: 'طاجين الخروف مقامر' }, description: { fr: 'Mijoté dans une sauce réduite parfumée à la cannelle, au gingembre et au safran', en: 'Simmered with a reduced sauce flavored with cinnamon, ginger, and saffron', ar: 'مطهو في صلصة مكثّفة بالقرفة والزنجبيل والزعفران' } },
+  { _id: 'menu-m17', _type: 'menuItem', category: 'fassi',     isNew: false, isVegetarian: false, order: 6, availableInPackages: ['simple', 'special', 'show'], name: { fr: 'Couscous Royal', en: 'Couscous Royal', ar: 'الكسكس الملكي' }, description: { fr: 'Poulet ou agneau (ou sans) avec légumes mélangés sur un lit de couscous', en: 'Chicken or lamb (or without) with mixed vegetables on a bed of couscous', ar: 'دجاج أو خروف (أو بدون) مع خضار مشكّلة على سرير من الكسكس' } },
+  { _id: 'menu-m18', _type: 'menuItem', category: 'fassi',     isNew: false, isVegetarian: false, order: 7, availableInPackages: ['simple', 'special', 'show'], name: { fr: 'Chich Kabab', en: 'Shish Kabab', ar: 'شيش كباب' }, description: { fr: 'Brochettes grillées servies avec riz basmati et légumes', en: 'Grilled skewers served with basmati rice and vegetables', ar: 'أسياخ مشوية مع أرز البسمتي والخضار' } },
+  { _id: 'menu-m19', _type: 'menuItem', category: 'dessert',   isNew: true,  isVegetarian: true,  order: 1, availableInPackages: ['simple'], name: { fr: 'Pâtisseries Marocaines', en: 'Moroccan Pastries', ar: 'الحلويات المغربية' }, description: { fr: 'Sélection de pâtisseries marocaines traditionnelles', en: 'Selection of traditional Moroccan pastries', ar: 'تشكيلة من الحلويات المغربية التقليدية' } },
+  { _id: 'menu-m20', _type: 'menuItem', category: 'dessert',   isNew: false, isVegetarian: true,  order: 2, availableInPackages: ['simple'], name: { fr: 'Jawhara', en: 'Jawhara', ar: 'جوهرة' }, description: { fr: 'Dessert fassi traditionnel', en: 'Traditional Fassi pastry dessert', ar: 'حلوى فاسية تقليدية' } },
+  { _id: 'menu-m21', _type: 'menuItem', category: 'dessert',   isNew: false, isVegetarian: true,  order: 3, availableInPackages: ['simple'], name: { fr: 'Salade de Fruits', en: 'Fruit Salad', ar: 'سلطة الفواكه' }, description: { fr: 'Fruits frais de saison', en: 'Fresh seasonal fruit salad', ar: 'سلطة فواكه طازجة موسمية' } },
+  { _id: 'menu-m22', _type: 'menuItem', category: 'dessert',   isNew: false, isVegetarian: true,  order: 4, availableInPackages: ['simple', 'special', 'show'], name: { fr: 'Fruits de Saison', en: 'Seasonal Fruit', ar: 'فواكه موسمية' }, description: { fr: 'Sélection de fruits frais de saison', en: 'Selection of fresh seasonal fruits', ar: 'تشكيلة من الفواكه الطازجة الموسمية' } },
+  { _id: 'menu-m23', _type: 'menuItem', category: 'beverage',  isNew: false, isVegetarian: true,  order: 1, availableInPackages: ['simple', 'special', 'show'], name: { fr: 'Thé à la Menthe Marocain', en: 'Moroccan Mint Tea', ar: 'أتاي بالنعناع' }, description: { fr: 'Thé vert traditionnel à la menthe fraîche', en: 'Traditional green tea with fresh mint', ar: 'شاي أخضر تقليدي بالنعناع الطازج' } },
+  { _id: 'menu-m24', _type: 'menuItem', category: 'beverage',  isNew: false, isVegetarian: true,  order: 2, availableInPackages: ['simple'], name: { fr: 'Café Nespresso', en: 'Nespresso Coffee', ar: 'قهوة نيسبريسو' }, description: { fr: 'Expresso Nespresso', en: 'Nespresso espresso', ar: 'إسبريسو نيسبريسو' } },
+  { _id: 'menu-m25', _type: 'menuItem', category: 'beverage',  isNew: true,  isVegetarian: true,  order: 3, availableInPackages: ['simple'], name: { fr: 'Jus Soultana', en: 'Soultana Juice', ar: 'عصير سلطانة' }, description: { fr: 'Jus maison spécialité de la maison', en: 'House specialty fresh juice', ar: 'عصير طازج تخصّص المنزل' } },
+  { _id: 'menu-m26', _type: 'menuItem', category: 'beverage',  isNew: false, isVegetarian: true,  order: 4, availableInPackages: ['simple'], name: { fr: "Jus d'Orange", en: 'Orange Juice', ar: 'عصير برتقال' }, description: { fr: "Jus d'orange fraîchement pressé", en: 'Freshly squeezed orange juice', ar: 'عصير برتقال طازج معصور' } },
+  { _id: 'menu-m27', _type: 'menuItem', category: 'beverage',  isNew: false, isVegetarian: true,  order: 5, availableInPackages: ['simple'], name: { fr: "Jus d'Avocat", en: 'Avocado Juice', ar: 'عصير أفوكادو' }, description: { fr: "Jus d'avocat crémeux", en: 'Creamy avocado juice', ar: 'عصير أفوكادو كريمي' } },
+  { _id: 'menu-m28', _type: 'menuItem', category: 'beverage',  isNew: false, isVegetarian: true,  order: 6, availableInPackages: ['simple'], name: { fr: 'Coca Cola', en: 'Coca Cola', ar: 'كوكا كولا' }, description: { fr: '', en: '', ar: '' } },
+  { _id: 'menu-m29', _type: 'menuItem', category: 'beverage',  isNew: false, isVegetarian: true,  order: 7, availableInPackages: ['simple'], name: { fr: 'Eau Gazeuse', en: 'Sparkling Water', ar: 'ماء غازي' }, description: { fr: '', en: '', ar: '' } },
+  { _id: 'menu-m30', _type: 'menuItem', category: 'beverage',  isNew: false, isVegetarian: true,  order: 8, availableInPackages: ['simple'], name: { fr: 'Eau Minérale (1.5L)', en: 'Mineral Water (1.5L)', ar: 'ماء معدني (1.5 لتر)' }, description: { fr: '', en: '', ar: '' } },
+]
+
+// ── Services ─────────────────────────────────────────────────────────────────
+const services = [
+  { _id: 'service-s1', _type: 'service', icon: 'car',   order: 1, title: { fr: 'Transferts Aéroport & Gare', en: 'Airport & Station Transfers', ar: 'نقل المطار والمحطة' }, description: { fr: "Transport privé et collectif vers et depuis l'aéroport Fès–Saïss et les gares, avec guides multilingues en option.", en: 'Private and group transportation to and from Fes–Saïss Airport and train stations, with optional multilingual guides.', ar: 'نقل خاص وجماعي من وإلى مطار فاس سايس ومحطات القطار، مع مرشدين متعددي اللغات اختيارياً.' } },
+  { _id: 'service-s2', _type: 'service', icon: 'map',   order: 2, title: { fr: 'Visites de la Médina de Fès', en: 'Fes Medina Tours', ar: 'جولات المدينة القديمة' }, description: { fr: "Excursions privées et en groupe dans l'ancienne Médina de Fès et la région environnante, adaptées à vos envies.", en: 'Private and group excursions through the ancient Fes Medina and surrounding region, tailored to your interests.', ar: 'جولات خاصة وجماعية في المدينة القديمة بفاس والمنطقة المحيطة، مُصمَّمة وفق اهتماماتك.' } },
+  { _id: 'service-s3', _type: 'service', icon: 'chef',  order: 3, title: { fr: 'Cours de Cuisine Marocaine', en: 'Moroccan Cooking Classes', ar: 'دروس الطبخ المغربي' }, description: { fr: 'Apprenez à préparer des plats marocains traditionnels dans notre cuisine — une expérience culturelle inoubliable.', en: 'Learn to prepare traditional Moroccan dishes in our restaurant kitchen — an unforgettable hands-on cultural experience.', ar: 'تعلّم إعداد الأطباق المغربية التقليدية في مطبخنا — تجربة ثقافية تفاعلية لا تُنسى.' } },
+  { _id: 'service-s4', _type: 'service', icon: 'music', order: 4, title: { fr: 'Spectacles Vivants', en: 'Live Entertainment', ar: 'العروض الحية' }, description: { fr: 'Profitez de musique live et de performances culturelles pendant votre dîner au Restaurant Soultana.', en: 'Enjoy live music and cultural performances during your dinner at Restaurant Soultana.', ar: 'استمتع بالموسيقى الحية والعروض الثقافية خلال عشائك في مطعم سلطانة.' } },
+  { _id: 'service-s5', _type: 'service', icon: 'bus',   order: 5, title: { fr: 'Transport des Hôtes', en: 'Guest Transportation', ar: 'نقل الضيوف' }, description: { fr: 'Navette gratuite vers et depuis les hôtels et hébergements à proximité sur demande.', en: 'Free pick-up and drop-off to and from nearby hotels and accommodations upon request.', ar: 'نقل مجاني من وإلى الفنادق والإقامات القريبة عند الطلب.' } },
+]
+
+// ── Testimonials ─────────────────────────────────────────────────────────────
+const testimonials = [
+  { _id: 'testimonial-t1', _type: 'testimonial', guestName: 'Sarah',          source: 'TripAdvisor',  rating: 5, date: '2024-03-15', quote: { fr: 'Propreté de la chambre, décoration, parking gratuit, accès facile, équipements du patio et service cinq étoiles à des prix raisonnables. Une expérience inoubliable !', en: 'Room cleanliness, decor, free parking, easy access, patio amenities, and five-star service with reasonable pricing. An unforgettable experience!', ar: 'نظافة الغرفة، الديكور، وقوف السيارات المجاني، سهولة الوصول، مرافق الفناء، وخدمة خمس نجوم بأسعار معقولة. تجربة لا تُنسى!' } },
+  { _id: 'testimonial-t2', _type: 'testimonial', guestName: 'Marie-Claire D.', source: 'Google',       rating: 5, date: '2024-02-20', quote: { fr: 'Un riad magnifique au cœur de Fès. La cuisine du Restaurant Soultana est exceptionnelle — les plats fassis sont authentiques et délicieux. Je recommande vivement !', en: 'A magnificent riad in the heart of Fes. The Restaurant Soultana cuisine is exceptional — the Fassi dishes are authentic and delicious. Highly recommended!', ar: 'رياض رائع في قلب فاس. مطبخ مطعم سلطانة استثنائي — الأطباق الفاسية أصيلة ولذيذة. أنصح به بشدة!' } },
+  { _id: 'testimonial-t3', _type: 'testimonial', guestName: 'Ahmed K.',        source: 'Booking.com',  rating: 5, date: '2024-01-10', quote: { fr: 'Personnel chaleureux et professionnel, décoration somptueuse et cuisine marocaine de grande qualité. La terrasse panoramique offre une vue imprenable sur Fès.', en: 'Warm and professional staff, sumptuous décor, and high-quality Moroccan cuisine. The panoramic terrace offers stunning views over Fes.', ar: 'طاقم دافئ ومحترف، ديكور فاخر، ومطبخ مغربي عالي الجودة. الشرفة البانورامية تطل على فاس بشكل خلاب.' } },
+]
+
+// ── Blog Posts ───────────────────────────────────────────────────────────────
+const blogPosts = [
+  { _id: 'blog-b1', _type: 'blogPost', publishedAt: '2023-12-20', slug: { _type: 'slug', current: 'celebration-christmas-eve-soultana' }, title: { fr: 'Célébrez la Magie du Réveillon de Noël au Restaurant Soultana !', en: 'Celebrate the Magic of Christmas Eve at Restaurant Soultana!', ar: 'احتفلوا بسحر ليلة رأس السنة في مطعم سلطانة!' }, excerpt: { fr: 'Le restaurant vous invite à rejoindre une célébration spéciale pour le réveillon de Noël avec un menu exclusif, de la musique live et des plats uniques.', en: 'The restaurant invites guests to join a special Christmas Eve celebration featuring an exclusive seasonal menu, live music, and unique dishes.', ar: 'يدعوكم المطعم للانضمام إلى احتفال خاص بعيد الميلاد مع قائمة موسمية حصرية وموسيقى حية وأطباق فريدة.' } },
+  { _id: 'blog-b2', _type: 'blogPost', publishedAt: '2023-08-06', slug: { _type: 'slug', current: 'fine-dining-medina-fez' }, title: { fr: 'La Gastronomie Fine dans la Médina de Fès', en: 'Fine Dining in the Medina of Fez', ar: 'تجربة الطعام الراقي في مدينة فاس القديمة' }, excerpt: { fr: 'Découvrez le Restaurant Soultana comme destination gastronomique offrant une expérience culinaire extraordinaire au cœur de la médina historique de Fès.', en: 'Discover Restaurant Soultana as a gastronomic destination offering an extraordinary culinary experience in the heart of the historic Fes medina.', ar: 'اكتشف مطعم سلطانة كوجهة غذائية تقدم تجربة طهوية استثنائية في قلب مدينة فاس التاريخية.' } },
+  { _id: 'blog-b3', _type: 'blogPost', publishedAt: '2023-07-17', slug: { _type: 'slug', current: 'music-gastronomy-soultana' }, title: { fr: 'Le Mariage Parfait de la Musique et de la Gastronomie', en: 'Experience the Perfect Blend of Music and Gastronomy', ar: 'اختبر المزيج المثالي بين الموسيقى والفن الطهوي' }, excerpt: { fr: 'Le restaurant annonce une offre unique combinant des performances musicales live avec la cuisine marocaine authentique pour une soirée culturelle complète.', en: 'The restaurant announces a unique offering combining live music performances with authentic Moroccan cuisine for a complete cultural evening.', ar: 'يُعلن المطعم عن عرض فريد يجمع بين الأداءات الموسيقية الحية والمطبخ المغربي الأصيل لأمسية ثقافية متكاملة.' } },
+]
+
+// ── Upload everything ─────────────────────────────────────────────────────────
+async function seed() {
+  const allDocs = [siteSettings, ...rooms, ...menuItems, ...services, ...testimonials, ...blogPosts]
+  console.log(`Uploading ${allDocs.length} documents to Sanity...`)
+
+  let success = 0
+  let failed  = 0
+
+  for (const doc of allDocs) {
+    try {
+      await client.createOrReplace(doc)
+      console.log(`✓ ${doc._type}: ${doc._id}`)
+      success++
+    } catch (err) {
+      console.error(`✗ ${doc._type}: ${doc._id} — ${err.message}`)
+      failed++
+    }
+  }
+
+  console.log(`\nDone! ${success} uploaded, ${failed} failed.`)
+  console.log('\nNote: Photos must be uploaded manually via the admin panel at /studio')
+}
+
+seed()

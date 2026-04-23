@@ -1,0 +1,183 @@
+/* globals.css — Global base styles */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Custom base styles ─────────────────────────────────────────── */
+@layer base {
+  body {
+    font-family: var(--font-body), 'Helvetica Neue', sans-serif;
+    color: #1C0A00;
+    background-color: #FDF8F0;
+    font-size: 16px;
+    line-height: 1.7;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading), Georgia, serif;
+  }
+
+  /* Arabic text needs extra line spacing */
+  :lang(ar) body,
+  :lang(ar) p,
+  :lang(ar) span {
+    font-family: var(--font-arabic), Arial, sans-serif;
+    line-height: 2;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar        { width: 6px; }
+  ::-webkit-scrollbar-track  { background: #FDF8F0; }
+  ::-webkit-scrollbar-thumb  { background: #C9A84C; border-radius: 3px; }
+}
+
+/* ── Reusable component classes ─────────────────────────────────── */
+@layer components {
+
+  /* Gold divider line used between sections */
+  .divider-gold {
+    width: 4rem;
+    height: 2px;
+    background-color: #C9A84C;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  /* Moroccan geometric background pattern */
+  .pattern-overlay {
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23C9A84C' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+
+  /* Consistent vertical section padding */
+  .section-padding {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+  }
+
+  @media (min-width: 768px) {
+    .section-padding {
+      padding-top: 6rem;
+      padding-bottom: 6rem;
+    }
+  }
+
+  /* Centered content container */
+  .container-custom {
+    max-width: 80rem;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  @media (min-width: 640px) {
+    .container-custom {
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .container-custom {
+      padding-left: 2rem;
+      padding-right: 2rem;
+    }
+  }
+
+  /* Primary button — deep Moroccan red */
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    background-color: #8B1A1A;
+    color: #ffffff;
+    font-family: var(--font-body), sans-serif;
+    font-weight: 600;
+    font-size: 0.875rem;
+    border: 2px solid #8B1A1A;
+    transition: background-color 0.2s, border-color 0.2s;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  .btn-primary:hover {
+    background-color: #A52020;
+    border-color: #A52020;
+  }
+
+  /* Secondary button — gold outline */
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    background-color: transparent;
+    color: #C9A84C;
+    font-family: var(--font-body), sans-serif;
+    font-weight: 600;
+    font-size: 0.875rem;
+    border: 2px solid #C9A84C;
+    transition: background-color 0.2s, color 0.2s;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  .btn-secondary:hover {
+    background-color: #C9A84C;
+    color: #1C0A00;
+  }
+
+  /* Ghost button — white outline on dark backgrounds */
+  .btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    background-color: transparent;
+    color: #ffffff;
+    font-family: var(--font-body), sans-serif;
+    font-weight: 600;
+    font-size: 0.875rem;
+    border: 2px solid #ffffff;
+    transition: background-color 0.2s, color 0.2s;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  .btn-ghost:hover {
+    background-color: #ffffff;
+    color: #1C0A00;
+  }
+
+  /* Section title — centered, large heading */
+  .section-title {
+    font-family: var(--font-heading), Georgia, serif;
+    font-size: 1.875rem;
+    font-weight: 700;
+    color: #1C0A00;
+    text-align: center;
+    margin-bottom: 0.75rem;
+  }
+
+  @media (min-width: 768px) {
+    .section-title {
+      font-size: 2.25rem;
+    }
+  }
+
+  /* Section subtitle — softer text below the title */
+  .section-subtitle {
+    color: #7A6248;
+    text-align: center;
+    font-size: 1.125rem;
+    margin-bottom: 3rem;
+  }
+}
